@@ -4,9 +4,9 @@
 '''
 获取模块的启动器: 动态调用所有以crawl开头的方法,然后获取抓取到的代理,将其送入数据库存储
 '''
-from db import RedisClient
-from crawler import Crawler
-from settings import POOL_UPPER_THRESHOLD
+from proxypool.db import RedisClient
+from proxypool.crawler import Crawler
+from proxypool.settings import POOL_UPPER_THRESHOLD
 
 class Getter():
     def __init__(self):

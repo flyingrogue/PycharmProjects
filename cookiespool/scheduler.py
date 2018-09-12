@@ -4,10 +4,10 @@
 
 import time
 from multiprocessing import Process
-from config import *
-from generator import *
-from tester import *
-from api import app
+from cookiespool.config import *
+from cookiespool.generator import *
+from cookiespool.tester import *
+from cookiespool.api import app
 
 
 class Scheduler(object):

@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
 
-from settings import *
+from proxypool.settings import *
 from multiprocessing import Process
-from api import app
-from getter import Getter
-from tester import Tester
+from proxypool.api import app
+from proxypool.getter import Getter
+from proxypool.tester import Tester
 import time
 
 class Scheduler():

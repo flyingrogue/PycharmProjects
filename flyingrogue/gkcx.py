@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
 
+'''
+查询各大高校不同专业在不同省份的录取分数线，并送入数据库
+'''
 import requests
 import json
 import re
@@ -105,7 +108,7 @@ if __name__=='__main__':
     provinceid=get_provinceid(province)
     kelei=input('Please enter the kelei:')
     keleiid=get_keleiid(kelei)
-    #db=open_mysql(school,province)
+    db=open_mysql(school,province)
     collection=open_mongodb(school,province)
     for info in schoolinfos:
         schoolid=info['schoolid']
@@ -113,7 +116,7 @@ if __name__=='__main__':
         for item in get_xml(schoolid,provinceid,keleiid):
             item['school']=schoolname
             collection.insert_one(item)
-            #print(item)
+            print(item)
             #to_mysql(school,province,item,db)
     #db.close()
 

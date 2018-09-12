@@ -3,8 +3,8 @@
 
 import json
 from flask import Flask,g
-from db import RedisClient
-from config import *
+from cookiespool.db import RedisClient
+from cookiespool.config import *
 
 
 __all__=['app']

@@ -2,11 +2,12 @@
 # _*_ coding:utf-8 _*_
 
 import json
-from config import *
-from db import RedisClient
+from cookiespool.config import *
+from cookiespool.db import RedisClient
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
-from weibocookies import WeiboCookies
+from cookiespool.weibocookies import WeiboCookies
+from cookiespool.xueqiucookies import XueqiuCookies
 
 #生成模块的父类
 class CookiesGenerator(object):
@@ -90,6 +91,14 @@ class WeiboCookiesGenerator(CookiesGenerator):
     #不同站点有不同的生成cookies的方法
     def new_cookies(self,username,password):
         return WeiboCookies(username,password,self.browser).main()
+
+class XueqiuCookiesGenerator(CookiesGenerator):
+    def __init__(self,website='xueqiu'):
+        CookiesGenerator.__init__(self,website)
+        self.website=website
+
+    def new_cookies(self,username,password):
+        return XueqiuCookies(username,password,self.browser).main()
 
 
 if __name__=='__main__':

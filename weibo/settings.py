@@ -98,6 +98,32 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
+#要做到中断后继续爬取，使用此命令运行爬虫,Request队列将被保存在某个路径下
+#scrapy crawl spider -s JOB_DIR=crawls/spider
+
+#将调度器的类和去重的类替换为scrapy-redis提供的类
+#SCHEDULER = 'scrapy_redis.scheduler.Scheduler'
+#DUPEFILTER = 'scrapy_redis.dupefilter.RFPDupeFilter'
+#配置redis连接,中括号代表密码选项可有可无，db是数据库代号，默认是0
+#REDIS_URL = 'redis://[:password]@host:port/db'
+#配置调度队列(此配置是可选的，默认使用优先级队列）
+#SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.PriorityQueue'
+#SCHEDULER_QUEUE_CLASS = 'scrapy.redis.queue.FifoQueue'
+#SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.LifoQueue'
+#配置持久化(默认是False，会在爬取全部完成后清空请求队列和去重集合，不想的话则设置为True）
+#SCHEDULER_PERSIST = True
+#配置重爬(默认是False,爬虫启动时不会清空队列和集合，想清空则设置为True)
+#SCHEDULER_FLUSH_ON_START = True
+#配置Pipeline(默认不启动，启动的话会将生成的Item存储到redis数据库,一般不启动）
+#ITEM_PIPELINES = {'scrapy_redis.pipelines.RedisPipeline':300}
+
+#若要使用布隆过滤器请替换DUPEFILTER
+#DUPEFILTER = 'scrapy_redis.bloomfilter.dupefilter.RFPDupeFilter'
+#散列函数的个数，默认为6，可以自行修改
+#BIOOMFILTER_HASH_NUMBER = 6
+#Bloom Filter的bit参数，默认30,去重数组占用128MB空间，去重量级1亿
+#BLOOMFILTER_BIT = 30
+
 
 MONGO_URL='127.0.0.1'
 MONGO_DB='weibo'

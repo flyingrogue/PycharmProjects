@@ -3,7 +3,7 @@
 
 import redis
 import random
-from config import *
+from cookiespool.config import *
 
 class RedisClient(object):
     #初始化Redis连接

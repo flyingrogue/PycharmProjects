@@ -10,6 +10,7 @@ from urllib.parse import quote
 from pyquery import PyQuery as pq
 import pymysql
 import pymongo
+import json
 
 chrome_options=webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
@@ -17,7 +18,7 @@ browser=webdriver.Chrome(chrome_options=chrome_options)
 #browser=webdriver.Chrome()
 #browser=webdriver.PhantomJS()
 wait=WebDriverWait(browser,10)
-KEYWORD='iPhone'
+KEYWORD='ipad'
 MAXPAGE=5
 
 def get_page(page):
@@ -52,7 +53,7 @@ def get_products(page_source):
         yield product
 
 def open_mysql():
-    db = pymysql.connect(host='localhost', user='root', password='ljb1994917', port=3306, db='taobao')
+    db = pymysql.connect(host='localhost', user='root', password='aaaaaa', port=3306, db='taobao')
     cursor = db.cursor()
     sql='CREATE TABLE IF NOT EXISTS products(id INT AUTO_INCREMENT PRIMARY KEY,title VARCHAR(100) NOT NULL,' \
         'shop VARCHAR(100) NOT NULL,location VARCHAR(100) NOT NULL,price VARCHAR(100) NOT NULL,deal VARCHAR(100),' \
@@ -75,13 +76,18 @@ def open_mongodb():
     collection=db.products
     return collection
 
+def write_file(content):
+    with open('products.csv','a',encoding='utf-8') as f:
+        f.write(json.dumps(content,ensure_ascii=False)+'\n')
+
 if __name__=='__main__':
-    #db=open_mysql()
+    db=open_mysql()
     collection=open_mongodb()
     for i in range(1,MAXPAGE+1):
         page_source=get_page(i)
         for product in get_products(page_source):
             print(product)
+            write_file(product)
             #to_mysql(db,product)
-            collection.insert_one(product)
+            #collection.insert_one(product)
     #db.close()

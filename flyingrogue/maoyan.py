@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
 
+'''
+猫眼Top100
+'''
 import requests
 import json
 from requests.exceptions import RequestException

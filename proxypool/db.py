@@ -5,9 +5,9 @@
 存储模块: 负责存储抓取下来的代理
 '''
 
-from settings import MAX_SCORE,MIN_SCORE,INITIAL_SCORE
-from settings import REDIS_HOST,REDIS_PORT,REDIS_PASSWORD,REDIS_KEY
-from error import PoolEmptyError
+from proxypool.settings import MAX_SCORE,MIN_SCORE,INITIAL_SCORE
+from proxypool.settings import REDIS_HOST,REDIS_PORT,REDIS_PASSWORD,REDIS_KEY
+from proxypool.error import PoolEmptyError
 import redis
 import re
 from random import choice

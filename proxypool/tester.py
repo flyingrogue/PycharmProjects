@@ -13,8 +13,8 @@ try:
     from aiohttp import ClientError
 except:
     from aiohttp import ClientProxyConnectionError as ProxyConnectionError
-from db import RedisClient
-from settings import VALID_STATUS_CODES,TEST_URL,BATCH_TEST_SIZE
+from proxypool.db import RedisClient
+from proxypool.settings import VALID_STATUS_CODES,TEST_URL,BATCH_TEST_SIZE
 
 class Tester(object):
     def __init__(self):
