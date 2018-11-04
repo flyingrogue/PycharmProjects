@@ -33,7 +33,12 @@ class TestSlide():
         size=img.size
         top,bottom,left,right=location['y'],location['y']+size['height'],location['x'],location['x']+size['width']
         return (top,bottom,left,right)
-
+    
+    #控制验证码图片的两种显示
+    def change_display(self,display):
+        js_code="document.getElementsByClassName('geetest_canvas_fullbg')[0].style.display='{}'".format(display)
+        self.browser.execute_script(js_code)
+        
     def get_geetest_image(self,name='captcha.png'):
         top,bottom,left,right=self.get_position()
         print('验证码位置',top,bottom,left,right)
@@ -75,10 +80,10 @@ class TestSlide():
         v=0
         t=0.2
         while current < distance:
-            if current < mid:
-                a=2
+            if current < 3/4*mid:
+                a=6
             else:
-                a=-3
+                a=-4
             v0=v
             v=v0+a*t
             move=v0*t + 1/2*a*t*t
@@ -109,15 +114,16 @@ class TestSlide():
         self.open()
         button=self.get_geetest_botton()
         button.click()
-        image1=self.get_geetest_image('captcha1.png')
-        slider=self.get_slider()
-        slider.click()
-        image2=self.get_geetest_image('captcha2.png')
-        gap=self.get_gap(image1,image2)
+        image_gap=self.get_geetest_image('captcha_gap.png')
+        self.change_display('block')
+        image_full=self.get_geetest_image('captcha_full.png')
+        self.change_display('none')
+        gap=self.get_gap(image_full,image_gap)
         print('缺口位置',gap)
         gap-=6
         track=self.get_track(gap)
         print('滑动轨迹',track)
+        slider=self.get_slider()
         self.move_to_gap(slider,track)
         if self.is_success():
             print('success')
